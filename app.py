@@ -63,7 +63,7 @@ if not st.session_state.new_message:
     user_message = st.chat_input("Say something")
     if user_message: 
         prompt_cocrea = f'''Perform the following tasks: 
-                        Task 1: read and understand the CoCrea call, here is the info of the call: {context}
+                        Task 1: read and understand the CoCrea call, here is the info of the call: {context} and remember that the call is for Colombia
                         Task 2: answer the question of the user based on the info of the call you just ingested. This is the question: {user_message}
                         '''
         st.session_state.new_message = True
