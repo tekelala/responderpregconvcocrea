@@ -59,11 +59,10 @@ for prompt in st.session_state.prompts:
 
 if not st.session_state.new_message:
     pregunta = st.chat_input("¿Cuál es tu duda?") 
-    if pregunta: R
-        user_message = f'''
-                    Do the following tasks: 
-                    Task 1: Read and understand the rules of the CoCrea call. Here are the rules {context}.
-                    Task 2: Answer the following question {pregunta} based in the rules of the call, if you do not know the anwer to the question say so'''
+    if pregunta:
+        user_message = f'''Do the following tasks: 
+                            Task 1: Read and understand the rules of the CoCrea call. Here are the rules {context}.
+                            Task 2: Answer the following question {pregunta} based in the rules of the call, if you do not know the anwer to the question say so'''
         st.session_state.new_message = True
         st.session_state.prompts.append({"role": "Human", "content": user_message })
         with st.spinner(text='Writing...'):
