@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 
+user_message = ""
 with open("convocatoria.txt", "r") as file:
     context = file.read()
 
