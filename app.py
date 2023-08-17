@@ -12,7 +12,7 @@ def send_message(prompts):
         "X-API-Key": st.secrets["API_KEY"]
     }
 
-    conversation = context + "\n\n" + "\n\n".join([f'{item["role"]}: {item["content"]}' for item in prompts]) + "\n\nAssistant:"
+    conversation = "\n\n".join([f'{item["role"]}: {item["content"]}' for item in prompts]) + "\n\nAssistant:"
 
 
     body = {
@@ -58,10 +58,14 @@ for prompt in st.session_state.prompts:
             st.write(prompt['content'])
 
 if not st.session_state.new_message:
-    user_message = st.chat_input("¿Cuál es tu duda?")
-    if user_message:
+    pregunta = st.chat_input("¿Cuál es tu duda?") 
+    user_message = f'''Role: You are an AI assistant trained in the formulation of creative and cultural economy projects using the logical framework methodology. Give your answers in Spanish.
+                    Do the following tasks: 
+                    Task 1: Read and understand the rules of the CoCrea call. Here are the rules {context}.
+                    Task 2: Answer the following question {pregunta} based in the rules of the call, if you do not know the anwer to the question say so'''
+    if user_message: 
         st.session_state.new_message = True
-        st.session_state.prompts.append({"role": "Human", "content": user_message})
+        st.session_state.prompts.append({"role": "Human", "content": user_message })
         with st.spinner(text='Writing...'):
             response_from_claude = send_message(st.session_state.prompts)
             st.session_state.prompts.append({"role": "Assistant", "content": response_from_claude})
