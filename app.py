@@ -40,8 +40,8 @@ def send_message(prompts):
     result = response.json()
     return result['completion'].strip()
 
-st.title("Chat with Claude")
-st.write("Welcome to our chat app!")
+st.title("Preguntale a la convocatoria CoCrea")
+st.write("¡No te quedes con la duda!")
 
 if "prompts" not in st.session_state:
     st.session_state.prompts = []
@@ -54,7 +54,7 @@ for prompt in st.session_state.prompts:
         with st.chat_message("Human", avatar="🧑‍💻"):
             st.write(prompt['content'])
     else: # role == "Assistant"
-        with st.chat_message(name="ClaudeBot", avatar="🤖"):
+        with st.chat_message(name="CoCreaBot", avatar="🤖"):
             st.write(prompt['content'])
 
 if not st.session_state.new_message:
