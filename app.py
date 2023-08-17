@@ -70,7 +70,7 @@ if not st.session_state.new_message:
         st.session_state.prompts.append({"role": "Human", "content": user_message, "defaultprompt": prompt_cocrea})
         with st.spinner(text='Pensando...'):
             response_from_claude = send_message(st.session_state.prompts)
-            st.session_state.prompts.append({"role": "Assistant", "content": response_from_claude})
+            st.session_state.prompts.append({"role": "Human", "content": user_message, "defaultprompt": prompt_cocrea})
             st.session_state.new_message = False
             st.experimental_rerun()
 
