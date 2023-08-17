@@ -12,7 +12,7 @@ def send_message(prompts):
         "X-API-Key": st.secrets["API_KEY"]
     }
 
-    conversation = "answer the questions based in the following context:" context + "\n\n" + "\n\n".join([f'{item["role"]}: {item["content"]}' for item in prompts]) + "\n\nAssistant:"
+    conversation = context + "\n\n" + "\n\n".join([f'{item["role"]}: {item["content"]}' for item in prompts]) + "\n\nAssistant:"
 
 
     body = {
