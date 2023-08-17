@@ -59,7 +59,7 @@ for prompt in st.session_state.prompts:
 
 if not st.session_state.new_message:
     pregunta = st.chat_input("¿Cuál es tu duda?") 
-    if user_message: 
+    if pregunta: 
         user_message = f'''Role: You are an AI assistant trained in the formulation of creative and cultural economy projects using the logical framework methodology. Give your answers in Spanish and do not say which task you are doing.
                     Do the following tasks: 
                     Task 1: Read and understand the rules of the CoCrea call. Here are the rules {context}.
