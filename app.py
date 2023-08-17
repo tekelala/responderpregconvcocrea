@@ -58,7 +58,7 @@ for prompt in st.session_state.prompts:
             st.write(prompt['content'])
 
 if not st.session_state.new_message:
-    user_message = st.chat_input("Say something")
+    user_message = st.chat_input("¿Cuál es tu duda?")
     if user_message:
         st.session_state.new_message = True
         st.session_state.prompts.append({"role": "Human", "content": user_message})
