@@ -5,6 +5,11 @@ import json
 with open("convocatoria.txt", "r") as file:
     context = file.read()
 
+prompt_cocrea = f'''Perform the following tasks: 
+                    Task 1: read and understand the CoCrea call, here is the info of the call: {context}
+                    Task 2: answer the question of the user based on the info of the call you just ingested. This is the question: {user_message}
+'''
+
 def send_message(prompts):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
@@ -61,8 +66,8 @@ if not st.session_state.new_message:
     user_message = st.chat_input("Say something")
     if user_message: 
         st.session_state.new_message = True
-        st.session_state.prompts.append({"role": "Human", "content": user_message })
-        with st.spinner(text='Writing...'):
+        st.session_state.prompts.append({"role": "Human", "content": user_message, prompt_cocrea })
+        with st.spinner(text='Pensando...'):
             response_from_claude = send_message(st.session_state.prompts)
             st.session_state.prompts.append({"role": "Assistant", "content": response_from_claude})
             st.session_state.new_message = False
