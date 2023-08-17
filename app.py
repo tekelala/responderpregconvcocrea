@@ -17,7 +17,7 @@ def send_message(prompts):
         "X-API-Key": st.secrets["API_KEY"]
     }
 
-    conversation = "\n\n".join([f'{item["role"]}: {item["content"]}' for item in prompts]) + "\n\nAssistant:"
+    conversation = "\n\n".join([f'{item["role"]}: {item["content"]}: {item["defaultprompt"]}' for item in prompts]) + "\n\nAssistant:"
 
 
     body = {
@@ -66,7 +66,7 @@ if not st.session_state.new_message:
     user_message = st.chat_input("Say something")
     if user_message: 
         st.session_state.new_message = True
-        st.session_state.prompts.append({"role": "Human", "content": user_message, prompt_cocrea })
+        st.session_state.prompts.append({"role": "Human", "content": user_message, "defaultprompt": prompt_cocrea})
         with st.spinner(text='Pensando...'):
             response_from_claude = send_message(st.session_state.prompts)
             st.session_state.prompts.append({"role": "Assistant", "content": response_from_claude})
