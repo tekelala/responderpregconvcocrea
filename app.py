@@ -61,16 +61,16 @@ for prompt in st.session_state.prompts:
 
 if not st.session_state.new_message:
     user_message = st.chat_input("Say something")
-    prompt_cocrea = f'''Perform the following tasks: 
-                    Task 1: read and understand the CoCrea call, here is the info of the call: {context}
-                    Task 2: answer the question of the user based on the info of the call you just ingested. This is the question: {user_message}
-                    '''
     if user_message: 
+        prompt_cocrea = f'''Perform the following tasks: 
+                        Task 1: read and understand the CoCrea call, here is the info of the call: {context}
+                        Task 2: answer the question of the user based on the info of the call you just ingested. This is the question: {user_message}
+                        '''
         st.session_state.new_message = True
         st.session_state.prompts.append({"role": "Human", "content": user_message, "defaultprompt": prompt_cocrea})
         with st.spinner(text='Pensando...'):
             response_from_claude = send_message(st.session_state.prompts)
-            st.session_state.prompts.append({"role": "Human", "content": user_message, "defaultprompt": prompt_cocrea})
+            st.session_state.prompts.append({"role": "Assistant", "content": response_from_claude, "defaultprompt": prompt_cocrea})
             st.session_state.new_message = False
             st.experimental_rerun()
 
